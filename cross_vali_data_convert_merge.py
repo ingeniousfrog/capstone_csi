@@ -8,7 +8,7 @@ threshold = 6
 slide_size = 20 #less than window_size!!!
 
 ###
-object_size = 5
+object_size = 10
 current_csv_name = ""
 current_category = ""
 csv_category = ["bed", "fall", "pickup", "run", "sitdown", "standup", "walk"]
@@ -76,6 +76,7 @@ def dataimport(path1, path2):
                 print("k:",k)
 
         xx = np.concatenate((xx,x2),axis=0)
+        print("xx:",xx)
         object_count+=1
         if object_count >=object_size:
             break
@@ -84,6 +85,7 @@ def dataimport(path1, path2):
         ###Annotation data###
         #data import from csv
     annotation_csv_files = sorted(glob.glob(path2))
+    object_count = 0
     for ff in annotation_csv_files:
         print("annotation_file_name=",ff)
         ano_data = [[ str(elm) for elm in v] for v in csv.reader(open(ff,"r"))]
@@ -120,7 +122,7 @@ def dataimport(path1, path2):
                 else:
                     noactivity += 1
 
-            if k%5000 ==0:
+            if k%10000 ==0 and k > 0:
                 print("k:",k)
                 if len(y >0):
                     print("y[0]:",y[0])
@@ -129,19 +131,19 @@ def dataimport(path1, path2):
 
 
 
-            if bed > window_size * threshold / 100:
+            if bed > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,1,0,0,0,0,0,0])
-            elif fall > window_size * threshold / 100:
+            elif fall > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,0,1,0,0,0,0,0])
-            elif walk > window_size * threshold / 100:
+            elif walk > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,0,0,1,0,0,0,0])
-            elif pickup > window_size * threshold / 100:
+            elif pickup > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,0,0,0,1,0,0,0])
-            elif run > window_size * threshold / 100:
+            elif run > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,0,0,0,0,1,0,0])
-            elif sitdown > window_size * threshold / 100:
+            elif sitdown > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,0,0,0,0,0,1,0])
-            elif standup > window_size * threshold / 100:
+            elif standup > window_size * threshold / 10:
                 y[int(k/slide_size),:] = np.array([0,0,0,0,0,0,0,1])
             else:
                 # if k==0:
@@ -151,7 +153,11 @@ def dataimport(path1, path2):
             k += slide_size
 
         yy = np.concatenate((yy, y),axis=0)
-    print(xx.shape,yy.shape)
+        print("yy:",yy)
+        object_count+=1
+        if object_count >=object_size:
+            break
+    print("xx.shape:",xx.shape,"yy.shape:",yy.shape)
     return (xx, yy)
 
 

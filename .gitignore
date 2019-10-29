@@ -1,0 +1,5 @@
+##KHJ Ignore File##
+Dataset/
+*.log
+*original.py
+*.csv

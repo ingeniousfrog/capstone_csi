@@ -22,14 +22,15 @@ import os
 from cross_vali_input_data import csv_import, DataSet
 
 # window_size = 500
-window_size = 100
+window_size = 50
 # threshold = 60
 threshold = 6
 
 # Parameters
 learning_rate = 0.0001
 training_iters = 2000
-batch_size = 200
+#batch_size = 20
+batch_size = 10
 display_step = 100
 
 # Network Parameters
@@ -106,8 +107,8 @@ print("y_bed.shape: ",y_bed.shape)
 print("x_bed: ",x_bed)
 print("y_bed: ",y_bed)
 ######################## - by allen
-x_bed = np.expand_dims(x_bed,axis=0)
-y_bed = np.expand_dims(y_bed,axis=0)
+# x_bed = np.expand_dims(x_bed,axis=0)
+# y_bed = np.expand_dims(y_bed,axis=0)
 print("x_bed: ",x_bed)
 print("y_bed: ",y_bed)
 
@@ -115,7 +116,7 @@ print("y_bed: ",y_bed)
 
 
 #########################
-x_bed, y_bed = shuffle(x_bed, y_bed, random_state=1)
+x_bed, y_bed = shuffle(x_bed, y_bed, random_state=0)
 print("x_bed: ",x_bed)
 print("y_bed: ",y_bed)
 x_fall, y_fall = shuffle(x_fall, y_fall, random_state=0)
