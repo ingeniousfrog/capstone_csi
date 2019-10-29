@@ -1,4 +1,3 @@
-This is allen's README file.
 
 
 Reference: https://github.com/ermongroup/Wifi_Activity_Recognition
