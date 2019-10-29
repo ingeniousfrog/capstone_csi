@@ -1,4 +1,4 @@
-
+SuperCrack Capstone Project
 
 Reference: https://github.com/ermongroup/Wifi_Activity_Recognition
 
